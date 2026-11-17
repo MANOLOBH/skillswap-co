@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkillSwap · Aprende sin pagar. Enseña lo que sabes.</title>
+  <meta name="description" content="SkillSwap es la plataforma donde los estudiantes intercambian habilidades en lugar de pagar por clases. Startup de Medellín, Colombia. Únete a la lista de espera del piloto.">
+  <meta name="theme-color" content="#16213E">
+
+  <!-- Open Graph (cambia og:url y og:image por la URL absoluta cuando publiques la web) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="SkillSwap">
+  <meta property="og:title" content="SkillSwap · Aprende sin pagar.">
+  <meta property="og:description" content="La plataforma donde los estudiantes intercambian habilidades. Únete a la lista de espera del piloto.">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SkillSwap: Aprende sin pagar. Español a cambio de Excel.">
+  <meta property="og:url" content="https://example.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Tipografías: Plus Jakarta Sans (títulos) + Inter (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Marca que JS está activo (activa las animaciones de aparición) -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- =========================================================
+       SPRITE DE ICONOS SVG (se usan con <svg><use href="#i-..."/></svg>)
+       ========================================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13v4"/><path d="M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2z"/><circle cx="16" cy="14.5" r="1.2"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3L4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2.5z"/><path d="M6 21h14M9 7h7"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2.2.6 3.5 2.8 3.5 6"/></symbol>
+    <symbol id="i-cycle" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 20c-1-9 4-15 15-16 0 11-6 16-14 15"/><path d="M5 20c3-5 6-7.5 10-9"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 19a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9.5a4.75 4.75 0 0 1-.5 9.5z"/><path d="M12.5 11l-2 3.5h3l-2 3.5"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.8 2.4 4.5 5 4.7"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.2v.1M12 17v-6.5M12 13.5c0-1.8 1-3 2.5-3s2.5 1 2.5 3V17"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- =========================================================
+       1. HEADER FIJO
+       ========================================================= -->
+  <header class="site-header" id="top">
+    <div class="container site-header__inner">
+      <a class="logo" href="#inicio" aria-label="SkillSwap, ir al inicio">
+        <span class="logo__icon" aria-hidden="true">
+          <svg class="icon"><use href="#i-swap"/></svg>
+        </span>
+        <span class="logo__text">Skill<span>Swap</span></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden">Abrir menú</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Principal">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#como-funciona">Cómo funciona</a></li>
+          <li><a class="site-nav__link" href="#precios">Precios</a></li>
+          <li><a class="site-nav__link" href="#impacto">Impacto</a></li>
+          <li><a class="site-nav__link" href="#equipo">Equipo</a></li>
+        </ul>
+        <a class="btn btn--primary btn--sm site-nav__cta" href="#contacto">Únete al piloto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =========================================================
+         2. HERO
+         ========================================================= -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="badge badge--made">
+            Hecho en Medellín
+            <svg class="flag" viewBox="0 0 30 20" role="img" aria-label="Colombia"><rect width="30" height="10" fill="#FCD116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#CE1126"/></svg>
+          </p>
+          <h1 class="hero__title" id="hero-title">Aprende sin pagar. <span class="accent">Enseña lo que sabes.</span></h1>
+          <p class="hero__subtitle">La plataforma donde los estudiantes intercambian habilidades.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="#contacto">Únete a la lista de espera</a>
+            <a class="btn btn--secondary btn--lg" href="#como-funciona">Cómo funciona</a>
+          </div>
+        </div>
+
+        <!-- Ilustración animada: motivo de intercambio -->
+        <div class="hero__visual" role="img" aria-label="Ejemplo de intercambio: 1 hora de español a cambio de 1 hora de Excel">
+          <div class="swap-scene" aria-hidden="true">
+            <span class="float-chip float-chip--1">Guitarra</span>
+            <span class="float-chip float-chip--2">Inglés</span>
+            <span class="float-chip float-chip--3">Diseño</span>
+
+            <div class="swap-bubbles">
+              <div class="bubble bubble--teal"><span class="bubble__abbr">Es</span><span class="bubble__label">Español</span></div>
+              <div class="swap-arrows">
+                <svg class="icon"><use href="#i-swap"/></svg>
+              </div>
+              <div class="bubble bubble--yellow"><span class="bubble__abbr">Xl</span><span class="bubble__label">Excel</span></div>
+            </div>
+
+            <div class="swap-card">
+              <div class="swap-card__side">
+                <span class="swap-card__kicker">Tú enseñas</span>
+                <strong>1 hora de español</strong>
+              </div>
+              <span class="swap-card__icon"><svg class="icon"><use href="#i-swap"/></svg></span>
+              <div class="swap-card__side">
+                <span class="swap-card__kicker">Tú aprendes</span>
+                <strong>1 hora de Excel</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. EL PROBLEMA
+         ========================================================= -->
+    <section class="section" id="problema" aria-labelledby="problema-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">El problema</p>
+          <h2 id="problema-title">Aprender es caro</h2>
+        </header>
+
+        <div class="grid grid--3">
+          <article class="card reveal">
+            <span class="card__icon card__icon--red"><svg class="icon"><use href="#i-tag"/></svg></span>
+            <h3>Clases caras</h3>
+            <p>Una hora de clase particular cuesta mucho dinero.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__icon card__icon--yellow"><svg class="icon"><use href="#i-wallet"/></svg></span>
+            <h3>Poco presupuesto</h3>
+            <p>Alquiler, comida y matrícula dejan poco para aprender más.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__icon card__icon--teal"><svg class="icon"><use href="#i-bulb"/></svg></span>
+            <h3>Talento sin usar</h3>
+            <p>Todos sabemos algo que otro estudiante necesita aprender.</p>
+          </article>
+        </div>
+
+        <p class="big-quote reveal">¿Y si pudieras <span class="accent">pagar con lo que ya sabes?</span></p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. CÓMO FUNCIONA + SIMULADOR DE MATCH
+         ========================================================= -->
+    <section class="section section--white" id="como-funciona" aria-labelledby="como-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Cómo funciona</p>
+          <h2 id="como-title">Tres pasos y empiezas a aprender</h2>
+        </header>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">1</span>
+            <span class="step__icon"><svg class="icon"><use href="#i-user"/></svg></span>
+            <h3>Crea tu perfil</h3>
+            <p>Cuenta qué sabes enseñar y qué quieres aprender.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">2</span>
+            <span class="step__icon"><svg class="icon"><use href="#i-search"/></svg></span>
+            <h3>Encuentra tu match</h3>
+            <p>Te mostramos estudiantes con habilidades complementarias.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">3</span>
+            <span class="step__icon"><svg class="icon"><use href="#i-swap"/></svg></span>
+            <h3>Intercambia</h3>
+            <p>Reúnete online o en persona. Tú enseñas, tú aprendes.</p>
+          </li>
+        </ol>
+
+        <p class="example-pill reveal">
+          <span>1 hora de español</span>
+          <span class="example-pill__eq" aria-label="equivale a">=</span>
+          <span>1 hora de Excel</span>
+        </p>
+
+        <!-- Simulador de match (datos de ejemplo en js/main.js) -->
+        <div class="simulator reveal" id="simulador">
+          <div class="simulator__intro">
+            <h3>Prueba el simulador de match</h3>
+            <p>Elige qué enseñas y qué quieres aprender. Te mostramos un perfil de ejemplo compatible.</p>
+          </div>
+
+          <form class="simulator__form" id="match-form" novalidate>
+            <div class="field">
+              <label for="sim-teach">Yo enseño…</label>
+              <select id="sim-teach" name="teach">
+                <option value="">Elige una habilidad</option>
+                <option>Español</option>
+                <option>Inglés</option>
+                <option>Alemán</option>
+                <option>Francés</option>
+                <option>Portugués</option>
+                <option>Excel</option>
+                <option>Programación</option>
+                <option>Guitarra</option>
+                <option>Diseño</option>
+                <option>Matemáticas</option>
+                <option>Fotografía</option>
+              </select>
+            </div>
+
+            <span class="simulator__swap" aria-hidden="true"><svg class="icon"><use href="#i-swap"/></svg></span>
+
+            <div class="field">
+              <label for="sim-learn">Quiero aprender…</label>
+              <select id="sim-learn" name="learn">
+                <option value="">Elige una habilidad</option>
+                <option>Español</option>
+                <option>Inglés</option>
+                <option>Alemán</option>
+                <option>Francés</option>
+                <option>Portugués</option>
+                <option>Excel</option>
+                <option>Programación</option>
+                <option>Guitarra</option>
+                <option>Diseño</option>
+                <option>Matemáticas</option>
+                <option>Fotografía</option>
+              </select>
+            </div>
+
+            <button class="btn btn--primary simulator__btn" type="submit">Buscar match</button>
+          </form>
+
+          <div class="simulator__result" id="match-result" aria-live="polite">
+            <p class="simulator__placeholder">Tu match aparecerá aquí.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. HECHO PARA CONECTAR CULTURAS
+         ========================================================= -->
+    <section class="section" id="culturas" aria-labelledby="culturas-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Intercultural</p>
+          <h2 id="culturas-title">Hecho para conectar culturas</h2>
+        </header>
+
+        <div class="grid grid--2">
+          <article class="card card--row reveal">
+            <span class="card__icon card__icon--teal"><svg class="icon"><use href="#i-globe"/></svg></span>
+            <div>
+              <h3>Idioma y variantes</h3>
+              <p>Cada usuario elige su variante del español: Colombia, España, México…</p>
+            </div>
+          </article>
+          <article class="card card--row reveal">
+            <span class="card__icon card__icon--red"><svg class="icon"><use href="#i-shield"/></svg></span>
+            <div>
+              <h3>Trato y confianza</h3>
+              <p>Perfiles con foto y presentación personal. El trato cercano genera confianza.</p>
+            </div>
+          </article>
+          <article class="card card--row reveal">
+            <span class="card__icon card__icon--yellow"><svg class="icon"><use href="#i-clock"/></svg></span>
+            <div>
+              <h3>Tiempo y puntualidad</h3>
+              <p>Recordatorios automáticos, porque la puntualidad se entiende distinto en cada cultura.</p>
+            </div>
+          </article>
+          <article class="card card--row reveal">
+            <span class="card__icon card__icon--navy"><svg class="icon"><use href="#i-chat"/></svg></span>
+            <div>
+              <h3>Comunicación</h3>
+              <p>Una guía de buenas prácticas para estilos directos e indirectos. Por ejemplo, en intercambios entre Colombia y Alemania.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. PRECIOS (FREEMIUM) — cambia aquí los precios
+         ========================================================= -->
+    <section class="section section--white" id="precios" aria-labelledby="precios-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Precios</p>
+          <h2 id="precios-title">Empieza gratis. Crece con Premium.</h2>
+          <p class="section-head__lead">Un modelo freemium pensado para estudiantes.</p>
+        </header>
+
+        <div class="pricing">
+          <article class="price-card reveal" aria-labelledby="plan-free">
+            <h3 class="price-card__name" id="plan-free">Gratis</h3>
+            <p class="price-card__price"><span class="price-card__amount">0</span> <span class="price-card__unit">COP</span></p>
+            <ul class="check-list">
+              <li><svg class="icon"><use href="#i-check"/></svg>Perfil y búsqueda de matches</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Intercambios limitados cada mes</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Chat básico</li>
+            </ul>
+            <a class="btn btn--secondary btn--block" href="#contacto">Empieza gratis</a>
+          </article>
+
+          <article class="price-card price-card--featured reveal" aria-labelledby="plan-premium">
+            <span class="badge badge--yellow price-card__badge"><svg class="icon"><use href="#i-star"/></svg>Más popular</span>
+            <h3 class="price-card__name" id="plan-premium">Premium</h3>
+            <p class="price-card__price">
+              <span class="price-card__approx">aprox.</span>
+              <span class="price-card__amount">19.900</span> <span class="price-card__unit">COP/mes</span>
+            </p>
+            <ul class="check-list">
+              <li><svg class="icon"><use href="#i-check"/></svg>Intercambios ilimitados</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Prioridad en las sugerencias</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Videollamada integrada</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Calendario integrado</li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="#contacto">Quiero Premium</a>
+          </article>
+        </div>
+
+        <div class="pricing__notes reveal">
+          <p class="note-scholarship"><svg class="icon"><use href="#i-heart"/></svg>Becas Premium para estudiantes con pocos recursos.</p>
+          <p class="small">¿Eres universidad o academia de idiomas? <a href="#contacto">Hablemos de alianzas.</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. ROADMAP
+         ========================================================= -->
+    <section class="section" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Nuestro camino</p>
+          <h2 id="roadmap-title">De una idea en Medellín a toda Latinoamérica</h2>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__item is-current reveal" aria-current="step">
+            <span class="timeline__dot" aria-hidden="true"></span>
+            <p class="timeline__when">Hoy <span class="badge badge--red">Estamos aquí</span></p>
+            <h3>Idea</h3>
+            <p>Nace en una universidad de Medellín.</p>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true"></span>
+            <p class="timeline__when">6 meses</p>
+            <h3>Piloto</h3>
+            <p>Primera versión de la app en un campus.</p>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true"></span>
+            <p class="timeline__when">Año 1</p>
+            <h3>Premium</h3>
+            <p>Activamos la membresía y sumamos universidades.</p>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true"></span>
+            <p class="timeline__when">Años 2–3</p>
+            <h3>Expansión</h3>
+            <p>Otras ciudades de Colombia y de Latinoamérica.</p>
+          </li>
+        </ol>
+
+        <p class="goal reveal"><strong>Objetivo:</strong> la mayor comunidad de intercambio de habilidades entre estudiantes.</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. IMPACTO
+         ========================================================= -->
+    <section class="section section--white" id="impacto" aria-labelledby="impacto-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Impacto</p>
+          <h2 id="impacto-title">Compartir conocimiento crea oportunidades para todos.</h2>
+        </header>
+
+        <div class="grid grid--2 impact">
+          <article class="impact__block impact__block--social reveal">
+            <h3>Responsabilidad social</h3>
+            <ul class="impact__list">
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-book"/></svg></span><div><strong>Educación abierta</strong><p>Aprender sin pagar reduce la barrera económica.</p></div></li>
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-heart"/></svg></span><div><strong>Inclusión</strong><p>Becas Premium para quien más lo necesita.</p></div></li>
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-users"/></svg></span><div><strong>Comunidad</strong><p>Talleres gratuitos y encuentros entre culturas.</p></div></li>
+            </ul>
+          </article>
+
+          <article class="impact__block impact__block--green reveal">
+            <h3>Compromiso ambiental</h3>
+            <ul class="impact__list">
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-cycle"/></svg></span><div><strong>Economía colaborativa</strong><p>Compartir conocimiento en lugar de consumir recursos.</p></div></li>
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-leaf"/></svg></span><div><strong>Empresa 100&nbsp;% digital</strong><p>Sin papel.</p></div></li>
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-cloud"/></svg></span><div><strong>Nube con energía renovable</strong><p>Nuestros servidores, con energía limpia.</p></div></li>
+              <li><span class="impact__icon"><svg class="icon"><use href="#i-laptop"/></svg></span><div><strong>Menos desplazamientos</strong><p>Clases online y teletrabajo.</p></div></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         9. EQUIPO + CULTURA
+         ========================================================= -->
+    <section class="section" id="equipo" aria-labelledby="equipo-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Equipo</p>
+          <h2 id="equipo-title">Las personas detrás de SkillSwap</h2>
+        </header>
+
+        <ul class="team">
+          <li class="team-card reveal">
+            <span class="avatar avatar--red" aria-hidden="true">L</span>
+            <h3>Leander</h3>
+            <p>Estrategia y finanzas</p>
+          </li>
+          <li class="team-card reveal">
+            <span class="avatar avatar--teal" aria-hidden="true">M</span>
+            <h3>Manuel</h3>
+            <p>Producto y tecnología</p>
+          </li>
+          <li class="team-card reveal">
+            <span class="avatar avatar--yellow" aria-hidden="true">L</span>
+            <h3>Lorena</h3>
+            <p>Marketing y comunidad</p>
+          </li>
+          <li class="team-card reveal">
+            <span class="avatar avatar--navy" aria-hidden="true">I</span>
+            <h3>Ilona</h3>
+            <p>Operaciones y soporte</p>
+          </li>
+        </ul>
+
+        <div class="culture reveal">
+          <h3>Nuestra cultura</h3>
+          <ul class="chips">
+            <li class="chip">Contratación local con prácticas para estudiantes</li>
+            <li class="chip">Trabajo híbrido y horarios flexibles</li>
+            <li class="chip">Formación continua</li>
+            <li class="chip">Igualdad de oportunidades</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         FAQ (acordeón accesible)
+         ========================================================= -->
+    <section class="section section--white" id="faq" aria-labelledby="faq-title">
+      <div class="container container--narrow">
+        <header class="section-head reveal">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2 id="faq-title">Lo que más nos preguntan</h2>
+        </header>
+
+        <div class="accordion reveal">
+          <div class="accordion__item">
+            <h3 class="accordion__heading">
+              <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-1-btn">
+                ¿Es realmente gratis?
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg>
+              </button>
+            </h3>
+            <div class="accordion__panel" id="faq-1" role="region" aria-labelledby="faq-1-btn" hidden>
+              <p>Sí. Con el plan Gratis creas tu perfil, buscas matches, usas el chat básico y haces algunos intercambios al mes. No pagas por aprender: pagas con lo que sabes. Si quieres más, existe Premium.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3 class="accordion__heading">
+              <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-2-btn">
+                ¿Los intercambios son online o presenciales?
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg>
+              </button>
+            </h3>
+            <div class="accordion__panel" id="faq-2" role="region" aria-labelledby="faq-2-btn" hidden>
+              <p>Las dos cosas. Tú y tu match deciden si se reúnen online o en persona.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3 class="accordion__heading">
+              <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-3-btn">
+                ¿Qué incluye Premium?
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg>
+              </button>
+            </h3>
+            <div class="accordion__panel" id="faq-3" role="region" aria-labelledby="faq-3-btn" hidden>
+              <p>Intercambios ilimitados, prioridad en las sugerencias de match, y videollamada y calendario integrados. Cuesta aproximadamente 19.900 COP al mes, y hay becas Premium para estudiantes con pocos recursos.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3 class="accordion__heading">
+              <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-4-btn">
+                ¿Dónde está disponible?
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg>
+              </button>
+            </h3>
+            <div class="accordion__panel" id="faq-4" role="region" aria-labelledby="faq-4-btn" hidden>
+              <p>Todavía en ningún sitio: SkillSwap está en fase de idea. El piloto llegará primero a un campus de Medellín. Después vendrán más universidades y, más adelante, otras ciudades de Colombia y de Latinoamérica. Únete a la lista de espera y te avisamos.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3 class="accordion__heading">
+              <button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-5-btn">
+                ¿Cómo se garantiza la confianza entre usuarios?
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg>
+              </button>
+            </h3>
+            <div class="accordion__panel" id="faq-5" role="region" aria-labelledby="faq-5-btn" hidden>
+              <p>Los perfiles llevan foto y una presentación personal. Además, hay recordatorios automáticos para las citas y una guía de buenas prácticas de comunicación entre culturas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         10. CTA FINAL + LISTA DE ESPERA
+         ========================================================= -->
+    <section class="section section--dark cta" id="contacto" aria-labelledby="cta-title">
+      <div class="container cta__grid">
+        <div class="cta__content reveal">
+          <p class="eyebrow eyebrow--light">Lista de espera del piloto</p>
+          <h2 id="cta-title">Aprende sin pagar. <span class="accent-yellow">Enseña lo que sabes.</span></h2>
+          <p>Apúntate y sé de los primeros en probar SkillSwap cuando el piloto llegue a tu campus.</p>
+          <ul class="cta__bullets">
+            <li><svg class="icon"><use href="#i-check"/></svg>Sin compromiso</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>Te escribimos solo para avisarte del piloto</li>
+          </ul>
+        </div>
+
+        <div class="form-card reveal">
+          <form class="waitlist" id="waitlist-form" novalidate>
+            <div class="field">
+              <label for="wl-name">Nombre</label>
+              <input id="wl-name" name="name" type="text" autocomplete="given-name" required aria-describedby="wl-name-error">
+              <p class="field__error" id="wl-name-error"></p>
+            </div>
+
+            <div class="field">
+              <label for="wl-email">Email</label>
+              <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="wl-email-error">
+              <p class="field__error" id="wl-email-error"></p>
+            </div>
+
+            <div class="field">
+              <label for="wl-uni">Universidad</label>
+              <input id="wl-uni" name="university" type="text" autocomplete="organization" required aria-describedby="wl-uni-error">
+              <p class="field__error" id="wl-uni-error"></p>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="wl-teach">Qué puedes enseñar</label>
+                <input id="wl-teach" name="teach" type="text" placeholder="Ej.: Español" required aria-describedby="wl-teach-error">
+                <p class="field__error" id="wl-teach-error"></p>
+              </div>
+              <div class="field">
+                <label for="wl-learn">Qué quieres aprender</label>
+                <input id="wl-learn" name="learn" type="text" placeholder="Ej.: Excel" required aria-describedby="wl-learn-error">
+                <p class="field__error" id="wl-learn-error"></p>
+              </div>
+            </div>
+
+            <div class="field field--check">
+              <input id="wl-privacy" name="privacy" type="checkbox" required aria-describedby="wl-privacy-error">
+              <label for="wl-privacy">Acepto la <a href="#privacidad">política de privacidad</a> y que SkillSwap me contacte sobre el piloto.</label>
+              <p class="field__error" id="wl-privacy-error"></p>
+            </div>
+
+            <button class="btn btn--primary btn--lg btn--block" type="submit">Únete a la lista de espera</button>
+          </form>
+
+          <div class="form-success" id="waitlist-success" role="status" tabindex="-1" hidden>
+            <span class="form-success__icon" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+            <p class="form-success__title">¡Estás dentro!</p>
+            <p>Te avisaremos cuando el piloto llegue a tu campus.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       11. FOOTER
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="logo logo--light" href="#inicio" aria-label="SkillSwap, volver al inicio">
+          <span class="logo__icon" aria-hidden="true"><svg class="icon"><use href="#i-swap"/></svg></span>
+          <span class="logo__text">Skill<span>Swap</span></span>
+        </a>
+        <p>SkillSwap S.A.S. · Medellín, Colombia</p>
+      </div>
+
+      <ul class="social" aria-label="Redes sociales">
+        <!-- TODO: añadir las URLs reales de las redes -->
+        <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+        <li><a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
+        <li><a href="#" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+      </ul>
+
+      <nav class="site-footer__links" aria-label="Legal">
+        <a href="#privacidad">Privacidad</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+
+    <div class="container site-footer__bottom">
+      <p id="privacidad" class="small">Privacidad: mientras estamos en fase de idea, los datos del formulario no se envían a ningún servidor ni se guardan.</p>
+      <p class="small">© <span id="year">2026</span> SkillSwap S.A.S. · Proyecto en fase de idea.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
